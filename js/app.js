@@ -192,7 +192,7 @@ const util = (() => {
                 scalar: randomInRange(1, 2),
                 drift: randomInRange(-0.5, 0.5),
             });
-                requestAnimationFrame(frame);
+            requestAnimationFrame(frame);
         };
         frame();
     };
@@ -251,18 +251,29 @@ const progress = (() => {
     const assets = document.querySelectorAll('img');
     const info = document.getElementById('progress-info');
     const bar = document.getElementById('bar');
+    const welcomePage = document.getElementById('welcome');
+    const mainContent = document.getElementById('mainContent');
 
     let total = assets.length;
     let loaded = 0;
 
+    const showWelcomePage = () => {
+        welcomePage.style.display = 'block';  // Set the display property to 'block'
+        welcomePage.style.opacity = 1;
+        mainContent.style.display = 'block';
+        mainContent.style.opacity = 1;
+        util.show();
+    };
+    
     const progress = () => {
         loaded += 1;
 
         bar.style.width = Math.min((loaded / total) * 100, 100).toString() + "%";
-        info.innerText = `Loading assets (${loaded}/${total}) [${parseInt(bar.style.width).toFixed(0)}%]`;
+        info.innerText = `Loading (${loaded}/${total}) [${parseInt(bar.style.width).toFixed(0)}%]`;
 
         if (loaded == total) {
-            util.show();
+            // util.show();
+            showWelcomePage();
         }
     };
 

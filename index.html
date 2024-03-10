@@ -104,44 +104,8 @@
 
 <body style="overflow-y: hidden;">
 
-    <!-- Navbar Bottom -->
-    <nav class="navbar navbar-dark bg-dark navbar-expand fixed-bottom rounded-top-4 p-0" id="navbar-menus">
-        <ul class="navbar-nav nav-justified w-100 align-items-center">
-            <li class="nav-item">
-                <a class="nav-link" href="#home">
-                    <i class="fas fa-home"></i>
-                    <span class="d-block" style="font-size: 0.7rem;">Home</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#mempelai">
-                    <i class="fa-solid fa-user-group"></i>
-                    <span class="d-block" style="font-size: 0.7rem;">Mempelai</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#tanggal">
-                    <i class="fa-solid fa-calendar-check"></i>
-                    <span class="d-block" style="font-size: 0.7rem;">Tanggal</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#galeri">
-                    <i class="fa-solid fa-images"></i>
-                    <span class="d-block" style="font-size: 0.7rem;">Galeri</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#ucapan">
-                    <i class="fa-solid fa-comments"></i>
-                    <span class="d-block" style="font-size: 0.7rem;">Ucapan</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Loading page -->
-    <div class="loading-page" id="loading" style="opacity: 1;">
+     <!-- Loading page -->
+     <!-- <div class="loading-page" id="loading" style="opacity: 1;">
         <div class="d-flex justify-content-center align-items-center" style="height: 100vh !important;">
             <div class="text-center w-75">
                 <img class="img-fluid mb-3" src="./assets/images/uk.png" alt="icon" style="width: 8rem;">
@@ -158,10 +122,10 @@
                 </noscript>
             </div>
         </div>
-    </div>
-
+    </div> -->
+    
     <!-- Welcome Page -->
-    <div class="loading-page" id="welcome" style="opacity: 0;display: none;">
+    <!-- <div class="loading-page" id="welcome" style="opacity: 1;">
         <div class="bubbles">
             <span style="--i:11;"></span>
             <span style="--i:12;"></span>
@@ -222,11 +186,47 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> -->
+
+    <!-- Navbar Bottom -->
+    <nav class="navbar navbar-dark bg-dark navbar-expand fixed-bottom rounded-top-4 p-0" id="navbar-menus">
+        <ul class="navbar-nav nav-justified w-100 align-items-center">
+            <li class="nav-item">
+                <a class="nav-link" href="#home">
+                    <i class="fas fa-home"></i>
+                    <span class="d-block" style="font-size: 0.7rem;">Home</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#mempelai">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span class="d-block" style="font-size: 0.7rem;">Mempelai</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#tanggal">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span class="d-block" style="font-size: 0.7rem;">Tanggal</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#galeri">
+                    <i class="fa-solid fa-images"></i>
+                    <span class="d-block" style="font-size: 0.7rem;">Galeri</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#ucapan">
+                    <i class="fa-solid fa-comments"></i>
+                    <span class="d-block" style="font-size: 0.7rem;">Ucapan</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
     <!-- Main Content -->
-    <main class="text-light" data-bs-spy="scroll" data-bs-target="#navbar-menus" data-bs-root-margin="0px 0px -40%"
-        data-bs-smooth-scroll="true" tabindex="0">
+    <main id="mainContent" class="text-light" data-bs-spy="scroll" data-bs-target="#navbar-menus" data-bs-root-margin="0px 0px -40%"
+        data-bs-smooth-scroll="true" tabindex="0" style="opacity: 0; display: none;">
 
         <!-- Home -->
         <section class="container" id="home">
@@ -694,11 +694,8 @@
 
                     <div class="mb-3">
                         <label for="form-pesan" class="form-label">Ucapan & Doa</label>
-                        <div id="alertDiv" class="alert alert-info alert-dismissible fade show" style="color: #ffff;"
-                            role="alert">
-                            <p>Terima kasih atas ucapan & doanya. Mark the date, clear your schedule, and be part of the
-                                moment marks a significant milestone in our journey, an eternal bond for a lifetime and
-                                still counting.</p>
+                        <div id="alertDiv" class="alert alert-info alert-dismissible fade show" style="color: #ffff;" role="alert">
+                            <p >Terima kasih atas ucapan & doanya. Mark the date, clear your schedule, and be part of the moment marks a significant milestone in our journey, an eternal bond for a lifetime and still counting.</p>
                             <p class="font-esthetic m-0" style="font-size: 1.5rem;color: #ffff;">Uci & Khamami</p>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                                 onclick="localStorage.setItem('alertClosed', 'true'); document.getElementById('alertDiv').style.display = 'none';"></button>
@@ -781,7 +778,7 @@
     </footer>
 
     <!-- Welcome Page -->
-    <!-- <div class="loading-page" id="welcome" style="opacity: 1;">
+    <div class="loading-page" id="welcome" style="opacity: 0;display: none;">
         <div class="bubbles">
             <span style="--i:11;"></span>
             <span style="--i:12;"></span>
@@ -842,7 +839,7 @@
                 </button>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- Audio Button -->
     <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music"
@@ -851,7 +848,7 @@
     </button>
 
     <!-- Loading page -->
-    <!-- <div class="loading-page" id="loading" style="opacity: 1;">
+    <div class="loading-page" id="loading" style="opacity: 1;">
         <div class="d-flex justify-content-center align-items-center" style="height: 100vh !important;">
             <div class="text-center w-75">
                 <img class="img-fluid mb-3" src="./assets/images/uk.png" alt="icon" style="width: 8rem;">
@@ -868,7 +865,7 @@
                 </noscript>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- Modal Foto Large -->
     <div class="modal fade" id="modal-image" tabindex="-1" aria-hidden="true">
@@ -890,32 +887,6 @@
         integrity="sha256-pQBbLkFHcP1cy0C8IhoSdxlm0CtcH5yJ2ki9jjgR03c=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"
         integrity="sha256-XG5M9shcLLpu8ct5bVbu6lLVzLpfZChl+csxdyLVP18=" crossorigin="anonymous"></script>
-
-    <script>
-        // Setelah halaman dimuat
-        window.addEventListener('load', function () {
-            // Simpan referensi elemen
-            var loadingPage = document.getElementById('loading');
-            var welcomePage = document.getElementById('welcome');
-            var mainContent = document.querySelector('main');
-
-            // Animasi muncul
-            setTimeout(function () {
-                loadingPage.style.opacity = 0;
-                setTimeout(function () {
-                    loadingPage.style.display = 'none';
-                    welcomePage.style.opacity = 1;
-                    setTimeout(function () {
-                        welcomePage.style.opacity = 0;
-                        setTimeout(function () {
-                            welcomePage.style.display = 'none';
-                            mainContent.style.opacity = 1;
-                        }, 500); // Waktu antara welcome dan main content
-                    }, 3000); // Waktu tampilan welcome page
-                }, 500); // Waktu tampilan loading page
-            }, 3000); // Waktu tampilan loading page
-        });
-    </script>
 </body>
 
 </html>
