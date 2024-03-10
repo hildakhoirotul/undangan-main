@@ -164,8 +164,6 @@ const util = (() => {
     };
 
     const animation = async () => {
-        const duration = 10 * 1000;
-        // const animationEnd = Date.now() + duration;
         let skew = 1;
 
         let randomInRange = (min, max) => {
@@ -173,7 +171,6 @@ const util = (() => {
         };
 
         const frame = async () => {
-            // const timeLeft = animationEnd - Date.now();
             const ticks = Math.max(200, 500 * (1));
 
             skew = Math.max(0.8, skew - 0.001);
@@ -258,7 +255,7 @@ const progress = (() => {
     let loaded = 0;
 
     const showWelcomePage = () => {
-        welcomePage.style.display = 'block';  // Set the display property to 'block'
+        welcomePage.style.display = 'block';
         welcomePage.style.opacity = 1;
         mainContent.style.display = 'block';
         mainContent.style.opacity = 1;

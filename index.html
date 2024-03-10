@@ -102,10 +102,11 @@
     <script src="./js/app.js" defer></script>
 </head>
 
-<body style="overflow-y: hidden;">
+<body data-email="user@example.com" data-password="12345678" data-url="https://api.ulems.my.id/"
+style="overflow-y: hidden;">
 
-     <!-- Loading page -->
-     <!-- <div class="loading-page" id="loading" style="opacity: 1;">
+    <!-- Loading page -->
+    <div class="loading-page" id="loading" style="opacity: 1;">
         <div class="d-flex justify-content-center align-items-center" style="height: 100vh !important;">
             <div class="text-center w-75">
                 <img class="img-fluid mb-3" src="./assets/images/uk.png" alt="icon" style="width: 8rem;">
@@ -122,71 +123,71 @@
                 </noscript>
             </div>
         </div>
-    </div> -->
-    
+    </div>
+
     <!-- Welcome Page -->
-    <!-- <div class="loading-page" id="welcome" style="opacity: 1;">
-        <div class="bubbles">
-            <span style="--i:11;"></span>
-            <span style="--i:12;"></span>
-            <span style="--i:24;"></span>
-            <span style="--i:10;"></span>
-            <span style="--i:14;"></span>
-            <span style="--i:23;"></span>
-            <span style="--i:18;"></span>
-            <span style="--i:16;"></span>
-            <span style="--i:19;"></span>
-            <span style="--i:20;"></span>
-            <span style="--i:22;"></span>
-            <span style="--i:25;"></span>
-            <span style="--i:18;"></span>
-            <span style="--i:21;"></span>
-            <span style="--i:15;"></span>
-            <span style="--i:13;"></span>
-            <span style="--i:26;"></span>
-            <span style="--i:17;"></span>
-            <span style="--i:13;"></span>
-            <span style="--i:28;"></span>
-            <span style="--i:11;"></span>
-            <span style="--i:12;"></span>
-            <span style="--i:24;"></span>
-            <span style="--i:10;"></span>
-            <span style="--i:14;"></span>
-            <span style="--i:23;"></span>
-            <span style="--i:18;"></span>
-            <span style="--i:16;"></span>
-            <span style="--i:19;"></span>
-            <span style="--i:20;"></span>
-            <span style="--i:22;"></span>
-            <span style="--i:25;"></span>
-            <span style="--i:18;"></span>
-            <span style="--i:21;"></span>
-            <span style="--i:15;"></span>
-            <span style="--i:13;"></span>
-            <span style="--i:26;"></span>
-            <span style="--i:17;"></span>
-            <span style="--i:13;"></span>
-            <span style="--i:28;"></span>
-        </div>
-        <div class="d-flex justify-content-center align-items-center" style="height: 100vh !important;">
+    <div class="loading-page" id="welcome" style="opacity: 0;display: none;">
+        <div class=" bubbles">
+        <span style="--i:11;"></span>
+        <span style="--i:12;"></span>
+        <span style="--i:24;"></span>
+        <span style="--i:10;"></span>
+        <span style="--i:14;"></span>
+        <span style="--i:23;"></span>
+        <span style="--i:18;"></span>
+        <span style="--i:16;"></span>
+        <span style="--i:19;"></span>
+        <span style="--i:20;"></span>
+        <span style="--i:22;"></span>
+        <span style="--i:25;"></span>
+        <span style="--i:18;"></span>
+        <span style="--i:21;"></span>
+        <span style="--i:15;"></span>
+        <span style="--i:13;"></span>
+        <span style="--i:26;"></span>
+        <span style="--i:17;"></span>
+        <span style="--i:13;"></span>
+        <span style="--i:28;"></span>
+        <span style="--i:11;"></span>
+        <span style="--i:12;"></span>
+        <span style="--i:24;"></span>
+        <span style="--i:10;"></span>
+        <span style="--i:14;"></span>
+        <span style="--i:23;"></span>
+        <span style="--i:18;"></span>
+        <span style="--i:16;"></span>
+        <span style="--i:19;"></span>
+        <span style="--i:20;"></span>
+        <span style="--i:22;"></span>
+        <span style="--i:25;"></span>
+        <span style="--i:18;"></span>
+        <span style="--i:21;"></span>
+        <span style="--i:15;"></span>
+        <span style="--i:13;"></span>
+        <span style="--i:26;"></span>
+        <span style="--i:17;"></span>
+        <span style="--i:13;"></span>
+        <span style="--i:28;"></span>
+    </div>
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh !important;">
 
-            <div class="text-center">
-                <h1 class="font-esthetic mb-4" style="font-size: 2.5rem;">The Wedding Of</h1>
+        <div class="text-center">
+            <h1 class="font-esthetic mb-4" style="font-size: 2.5rem;">The Wedding Of</h1>
 
-                <div class="img-crop border border-3 border-light shadow mb-4 mx-auto">
-                    <img src="./assets/images/foto3.jpg" alt="bg">
-                </div>
-
-                <h1 class="font-esthetic my-4" style="font-size: 2.5rem;">Uci & Khamami</h1>
-                <div id="nama-tamu"></div>
-
-                <button type="button" class="btn btn-light shadow rounded-4 mt-4" style="color: #07396c;"
-                    onclick="util.buka(this)">
-                    <i class="fa-solid fa-envelope-open me-2"></i>Buka Undangan
-                </button>
+            <div class="img-crop border border-3 border-light shadow mb-4 mx-auto">
+                <img src="./assets/images/foto3.jpg" alt="bg">
             </div>
+
+            <h1 class="font-esthetic my-4" style="font-size: 2.5rem;">Uci & Khamami</h1>
+            <div id="nama-tamu"></div>
+
+            <button type="button" class="btn btn-light shadow rounded-4 mt-4" style="color: #07396c;"
+                onclick="util.buka(this)">
+                <i class="fa-solid fa-envelope-open me-2"></i>Buka Undangan
+            </button>
         </div>
-    </div> -->
+    </div>
+    </div>
 
     <!-- Navbar Bottom -->
     <nav class="navbar navbar-dark bg-dark navbar-expand fixed-bottom rounded-top-4 p-0" id="navbar-menus">
@@ -225,8 +226,8 @@
     </nav>
 
     <!-- Main Content -->
-    <main id="mainContent" class="text-light" data-bs-spy="scroll" data-bs-target="#navbar-menus" data-bs-root-margin="0px 0px -40%"
-        data-bs-smooth-scroll="true" tabindex="0" style="opacity: 0; display: none;">
+    <main id="mainContent" class="text-light" data-bs-spy="scroll" data-bs-target="#navbar-menus"
+        data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0" style="opacity: 0; display: none;">
 
         <!-- Home -->
         <section class="container" id="home">
@@ -694,8 +695,11 @@
 
                     <div class="mb-3">
                         <label for="form-pesan" class="form-label">Ucapan & Doa</label>
-                        <div id="alertDiv" class="alert alert-info alert-dismissible fade show" style="color: #ffff;" role="alert">
-                            <p >Terima kasih atas ucapan & doanya. Mark the date, clear your schedule, and be part of the moment marks a significant milestone in our journey, an eternal bond for a lifetime and still counting.</p>
+                        <div id="alertDiv" class="alert alert-info alert-dismissible fade show" style="color: #ffff;"
+                            role="alert">
+                            <p>Terima kasih atas ucapan & doanya. Mark the date, clear your schedule, and be part of the
+                                moment marks a significant milestone in our journey, an eternal bond for a lifetime and
+                                still counting.</p>
                             <p class="font-esthetic m-0" style="font-size: 1.5rem;color: #ffff;">Uci & Khamami</p>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                                 onclick="localStorage.setItem('alertClosed', 'true'); document.getElementById('alertDiv').style.display = 'none';"></button>
@@ -778,7 +782,7 @@
     </footer>
 
     <!-- Welcome Page -->
-    <div class="loading-page" id="welcome" style="opacity: 0;display: none;">
+    <!-- <div class="loading-page" id="welcome" style="opacity: 0;display: none;">
         <div class="bubbles">
             <span style="--i:11;"></span>
             <span style="--i:12;"></span>
@@ -839,7 +843,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Audio Button -->
     <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music"
@@ -848,7 +852,7 @@
     </button>
 
     <!-- Loading page -->
-    <div class="loading-page" id="loading" style="opacity: 1;">
+    <!-- <div class="loading-page" id="loading" style="opacity: 1;">
         <div class="d-flex justify-content-center align-items-center" style="height: 100vh !important;">
             <div class="text-center w-75">
                 <img class="img-fluid mb-3" src="./assets/images/uk.png" alt="icon" style="width: 8rem;">
@@ -865,7 +869,7 @@
                 </noscript>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Modal Foto Large -->
     <div class="modal fade" id="modal-image" tabindex="-1" aria-hidden="true">
