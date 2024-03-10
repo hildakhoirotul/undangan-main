@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 var firebaseConfig = {
     apiKey: "AIzaSyC_cyVUFdJ21XBm8Da_Z049lH6y2xr8r20",
@@ -133,19 +133,10 @@ async function tampilkanData() {
     const ucapanContainer = document.getElementById('daftar-ucapan');
 
     try {
-        let query;
-
-        if (pageNow > 0) {
-            // Jika ada halaman sebelumnya, gunakan getLastDoc
-            const lastDoc = await getLastDoc(true);
-            query = query(collection(db, 'daftar-ucapan').orderBy('created_at').startAfter(lastDoc).limit(perPage));
-        } else {
-            // Jika tidak ada halaman sebelumnya, gunakan limit awal
-            query = query(collection(db, 'daftar-ucapan').orderBy('created_at').limit(perPage));
-        }
-
-        const querySnapshot = await getDocs(query);
-
+        // const querySnapshot = await getDocs(collection(db, 'daftar-ucapan'));
+        const querySnapshot = await getDocs(
+            query(collection(db, 'daftar-ucapan'), orderBy('created_at', 'desc'))
+        );
         ucapanContainer.innerHTML = "";
 
         if (querySnapshot.size === 0) {
@@ -158,7 +149,7 @@ async function tampilkanData() {
 
             // Membuat elemen untuk menampilkan data
             const cardElement = document.createElement('div');
-            cardElement.className = 'card mb-2';
+            cardElement.className = 'card mb-2 comment-card';
 
             cardElement.innerHTML = `
             <div class="card-body bg-light shadow p-3 m-0 rounded-4" data-parent="true" id="${data.uuid}">
@@ -175,7 +166,6 @@ async function tampilkanData() {
 
             // Menambahkan elemen ke dalam kontainer
             ucapanContainer.appendChild(cardElement);
-            lastDoc = doc;
         });
     } catch (error) {
         console.error('Error fetching documents: ', error);
@@ -209,16 +199,16 @@ const innerComment = (data) => {
     return `
     <div class="d-flex flex-wrap justify-content-between align-items-center">
         <div class="d-flex flex-wrap justify-content-start align-items-center">
-            <button style="font-size: 0.8rem;" id="btnBalas-${data.uuid}" data-uuid="${data.uuid}" ${docidAttribute} class="btn btn-sm btn-outline-dark rounded-3 py-0">Balas</button>
+            <button style="font-size: 0.8rem;" id="btnBalas-${data.uuid}" data-uuid="${data.uuid}" ${docidAttribute} class="btn btn-sm btn-outline-dark rounded-3 py-0">reply</button>
             ${owns.has(data.uuid)
             ? `
-            <button style="font-size: 0.8rem;" id="btnUbah-${data.uuid}" data-uuid="${data.uuid}" ${docidAttribute} class="btn btn-sm btn-outline-dark rounded-3 py-0 ms-1">Ubah</button>
-            <button style="font-size: 0.8rem;" id="btnHapus-${data.uuid}" data-uuid="${data.uuid}" ${docidAttribute} class="btn btn-sm btn-outline-dark rounded-3 py-0 ms-1">Hapus</button>`
+            <button style="font-size: 0.8rem;" id="btnUbah-${data.uuid}" data-uuid="${data.uuid}" ${docidAttribute} class="btn btn-sm btn-outline-dark rounded-3 py-0 ms-1">edit</button>
+            <button style="font-size: 0.8rem;" id="btnHapus-${data.uuid}" data-uuid="${data.uuid}" ${docidAttribute} class="btn btn-sm btn-outline-dark rounded-3 py-0 ms-1">delete</button>`
             : ''}
         </div>
         <button style="font-size: 0.8rem;" onclick="window.like('${data.uuid}', ${data.docid ? `'${data.docid}'` : null})" id="btnLike-${data.uuid}" data-uuid="${data.uuid}" ${docidAttribute} class="btn btn-sm btn-outline-dark rounded-2 py-0 px-0">
             <div class="d-flex justify-content-start align-items-center">
-                <p class="my-0 mx-1" data-suka="${data.like.love}">${data.like.love} suka</p>
+                <p class="my-0 mx-1" data-suka="${data.like.love}">${data.like.love} like</p>
                 <i class="py-1 me-1 p-0 ${likes.has(data.uuid) ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart'}"></i>
             </div>
         </button>
@@ -337,7 +327,7 @@ const like = async (id, docid) => {
                 }
                 await updateDoc(docRef, existingData);
                 info.setAttribute('data-suka', existingComment.like.love.toString());
-                info.innerText = `${existingComment.like.love} suka`;
+                info.innerText = `${existingComment.like.love} like`;
             } else {
                 if (likes.has(id)) {
                     likes.unset(id);
@@ -357,7 +347,7 @@ const like = async (id, docid) => {
                 }
                 await updateDoc(docRef, existingData);
                 info.setAttribute('data-suka', existingData.like.love.toString());
-                info.innerText = `${existingData.like.love} suka`;
+                info.innerText = `${existingData.like.love} like`;
             }
             button.disabled = false;
         } else {
@@ -803,93 +793,4 @@ function removeComment(comments, targetComment) {
         }
         return true;
     });
-}
-
-const pagination = (() => {
-
-    const perPage = 10;
-    let pageNow = 0;
-    let resultData = 0;
-
-    const page = document.getElementById('page');
-    const prev = document.getElementById('previous');
-    const next = document.getElementById('next');
-
-    const disabledPrevious = () => {
-        prev.classList.add('disabled');
-    };
-
-    const disabledNext = () => {
-        next.classList.add('disabled');
-    };
-
-    const buttonAction = async (button) => {
-        let tmp = button.innerHTML;
-        button.disabled = true;
-        button.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span>Loading...`;
-        await comment.ucapan();
-        document.getElementById('daftar-ucapan').scrollIntoView({ behavior: 'smooth' });
-        button.disabled = false;
-        button.innerHTML = tmp;
-    };
-
-    return {
-        getPer: () => {
-            return perPage;
-        },
-        getNext: () => {
-            return pageNow;
-        },
-        reset: async () => {
-            pageNow = 0;
-            resultData = 0;
-            page.innerText = 1;
-            next.classList.remove('disabled');
-            await comment.ucapan();
-            disabledPrevious();
-        },
-        setResultData: (len) => {
-            resultData = len;
-            if (resultData < perPage) {
-                disabledNext();
-            }
-        },
-        previous: async (button) => {
-            if (pageNow <= 0) {
-                disabledPrevious();
-                return;
-            }
-
-            pageNow -= perPage;
-            await buttonAction(button);
-            page.innerText = parseInt(page.innerText) - 1;
-            next.classList.remove('disabled');
-        },
-        next: async (button) => {
-            const lastDoc = await getLastDoc();
-            if (!lastDoc) {
-                disabledNext();
-                return;
-            }
-
-            pageNow += perPage;
-            await buttonAction(button);
-            page.innerText = parseInt(page.innerText) + 1;
-            prev.classList.remove('disabled');
-        }
-    };
-})();
-
-async function getLastDoc(previousPage) {
-    let query = collection(db, 'daftar-ucapan');
-
-    if (previousPage && lastDoc) {
-        query = query.startAfter(lastDoc);
-    }
-
-    query = query.orderBy('created_at').limit(perPage);
-
-    const querySnapshot = await getDocs(query);
-
-    return querySnapshot.docs.length > 0 ? querySnapshot.docs[querySnapshot.docs.length - 1] : null;
 }
